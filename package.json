@@ -1,0 +1,25 @@
+{
+  "name": "flowgraph",
+  "version": "1.0.0",
+  "description": "interactive graph editor in the browser\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/finnp/flowgraph.git"
+  },
+  "keywords": [
+    "graph",
+    "flow",
+    "flowchart",
+    "diagram"
+  ],
+  "author": "Finn Pauls",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/finnp/flowgraph/issues"
+  },
+  "homepage": "https://github.com/finnp/flowgraph#readme"
+}
