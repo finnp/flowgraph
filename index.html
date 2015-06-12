@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+    html, body, svg {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    svg .node {
+      fill: #ccc;
+      cursor: -webkit-grab;
+    }
+    svg .node rect {
+      rx: 8px;
+      ry: 8px;
+      stroke: black;
+      stroke-width: 3px;
+    }
+    svg .node text {
+      fill: black;
+      font-size: 25px;
+      font-family: Helvetica;
+    }
+    svg .output {
+      fill: #FF5E56;
+      stroke: black;
+      stroke-width: 3px;
+    }
+    svg .input {
+      fill: #48D559;
+      stroke: black;
+      stroke-width: 3px;
+    }
+    svg .connector, svg .edge {
+      fill: transparent;
+      stroke: black;
+      stroke-width: 3px;
+    }
+    </style>
+  </head>
+  <body>
+    <script src="bundle.js"></script>
+  </body>
+</html>

@@ -21,5 +21,13 @@
   "bugs": {
     "url": "https://github.com/finnp/flowgraph/issues"
   },
-  "homepage": "https://github.com/finnp/flowgraph#readme"
+  "homepage": "https://github.com/finnp/flowgraph#readme",
+  "dependencies": {
+    "delegate-dom": "0.0.1",
+    "element-class": "^0.2.0",
+    "index-array": "^2.0.0",
+    "svg-create-element": "^1.0.0",
+    "virtual-dom": "^2.0.1",
+    "virtual-hyperscript-svg": "^2.0.0"
+  }
 }
