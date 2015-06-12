@@ -25,15 +25,20 @@
       font-size: 25px;
       font-family: Helvetica;
     }
-    svg .output {
-      fill: #FF5E56;
+    svg .port {
+      cursor: pointer;
+      r: 5;
       stroke: black;
       stroke-width: 3px;
     }
+    svg .port:hover {
+      r: 7;
+    }
+    svg .output{
+      fill: #FF5E56;
+    }
     svg .input {
       fill: #48D559;
-      stroke: black;
-      stroke-width: 3px;
     }
     svg .connector, svg .edge {
       fill: transparent;
