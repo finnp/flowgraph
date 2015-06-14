@@ -18,12 +18,27 @@ Flowgraph.prototype.addNode = function (node) {
   this.nodes.push({id: node, x: 0, y: 0})
 }
 
+Flowgraph.prototype.deleteNode = function (id) {
+  this.edges = this.edges.filter(function (edge) {
+    return edge.from !== id && edge.to !== id
+  })
+  this.nodes = this.nodes.filter(function (node) {
+    return node.id !== id
+  })
+}
+
 Flowgraph.prototype.connect = function (a, b) {
   // {a: ['b'], b: [], c: ['a', 'b', 'c']}
   // {a: {b: true}, b: {}, c: {a: true, b: true, c: true}} -- no double edge
   // for(from in edges) {
   
   this.edges.push({from: a, to: b})
+}
+
+Flowgraph.prototype.disconnect = function (a, b) {
+  this.edges = this.edges.filter(function (edge) {
+    return edge.from !== a || edge.to !== b
+  })
 }
 
 Flowgraph.prototype.getEdges = function () {

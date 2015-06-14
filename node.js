@@ -19,13 +19,14 @@ function renderNode(node) {
     cx: 100,
     cy: 50
   })
-  var text = h('text', {x: 50, y: 50}, node.id)
+  var text = h('text', {x: 45, y: 60}, node.id)
   var domNode = h('g', {
     id: node.id,
     class: 'node',
     transform: 'translate(' + node.x + ',' + node.y + ')'
   },[
     rect,
+    text,
     leftDot,
     rightDot
   ])

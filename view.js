@@ -22,9 +22,9 @@ function FlowGraphView(data) {
 }
 
 FlowGraphView.prototype.render = function() {
-  var domNodes = this.data.edges.map(renderEdge.bind(this, this.data))
-    .concat(this.data.nodes.map(renderNode))
-    
+  var domNodes = this.data.edges
+    .map(renderEdge.bind(this, this.data))
+
   var fromId = this.data.connector.from
   var fromNode = this.data.getEdge(fromId)
   
@@ -39,6 +39,7 @@ FlowGraphView.prototype.render = function() {
     )
     domNodes.push(line)
   }
+  domNodes = domNodes.concat(this.data.nodes.map(renderNode))
   var svg = h('svg', {}, domNodes)
   return svg
 }
@@ -54,7 +55,7 @@ FlowGraphView.prototype.registerHandlers = function() {
   }.bind(this), 50)
   
   
-  delegate.on(this.svg, '.node rect', 'mousedown', function (e) {
+  delegate.on(this.svg, '.node rect, .node text', 'mousedown', function (e) {
     var id = e.target.parentNode.getAttribute('id')
 
     document.onmousemove = moveObject
