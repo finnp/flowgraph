@@ -1,7 +1,5 @@
 var indexArray = require('index-array')
 
-var FlowGraphView = require('./view.js')
-
 module.exports = Flowgraph
 
 function Flowgraph() {
@@ -45,12 +43,8 @@ Flowgraph.prototype.getEdges = function () {
   return this.edges
 }
 
-Flowgraph.prototype.getEdge = function (id) {
+Flowgraph.prototype.getNode = function (id) {
   return indexArray(this.nodes, 'id')[id]
-}
-
-Flowgraph.prototype.display = function () {
-  new FlowGraphView(this)
 }
 
 // [{from: 'A', to: 'B'}, ...]

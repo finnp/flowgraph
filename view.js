@@ -1,3 +1,5 @@
+var EventEmitter = require('events').EventEmitter
+var inherits = require('inherits')
 var delegate = require('delegate-dom')
 
 var h = require('virtual-hyperscript-svg')
@@ -13,6 +15,8 @@ var renderNode = require('./node.js')
 
 module.exports = FlowGraphView
 
+inherits(FlowGraphView, EventEmitter)
+
 function FlowGraphView(data) {
   this.data = data
   this.tree = this.render()
@@ -26,7 +30,7 @@ FlowGraphView.prototype.render = function() {
     .map(renderEdge.bind(this, this.data))
 
   var fromId = this.data.connector.from
-  var fromNode = this.data.getEdge(fromId)
+  var fromNode = this.data.getNode(fromId)
   
   if(this.data.connector.active) {
     var line = renderCurve(
@@ -45,6 +49,7 @@ FlowGraphView.prototype.render = function() {
 }
 
 FlowGraphView.prototype.registerHandlers = function() {
+  var self = this
   var data = this.data
 
   setInterval(function () {
@@ -55,11 +60,16 @@ FlowGraphView.prototype.registerHandlers = function() {
   }.bind(this), 50)
   
   
+  delegate.on(this.svg, '.node rect, .node text', 'click', function (e) {
+    var id = e.target.parentNode.getAttribute('id')
+    self.emit('node-select', data.getNode(id))
+  })
+  
   delegate.on(this.svg, '.node rect, .node text', 'mousedown', function (e) {
     var id = e.target.parentNode.getAttribute('id')
 
     document.onmousemove = moveObject
-    var moved = data.getEdge(id)
+    var moved = data.getNode(id)
     function moveObject(e) {
       moved.x = e.pageX - 50
       moved.y = e.pageY - 50

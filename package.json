@@ -27,6 +27,8 @@
     "delegate-dom": "0.0.1",
     "element-class": "^0.2.0",
     "index-array": "^2.0.0",
+    "inherits": "^2.0.1",
+    "klayjs": "^0.3.2",
     "svg-create-element": "^1.0.0",
     "virtual-dom": "^2.0.1",
     "virtual-hyperscript-svg": "^2.0.0"
