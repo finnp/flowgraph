@@ -65,6 +65,11 @@ FlowGraphView.prototype.registerHandlers = function() {
     self.emit('node-select', data.getNode(id))
   })
   
+  delegate.on(this.svg, '.node .close', 'click', function (e) {
+    var id = e.target.parentNode.getAttribute('id')
+    data.deleteNode(id)
+  })
+  
   delegate.on(this.svg, '.node rect, .node text', 'mousedown', function (e) {
     var id = e.target.parentNode.getAttribute('id')
 
