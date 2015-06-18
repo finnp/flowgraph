@@ -1,4 +1,7 @@
 # flowgraph
+
+This repo is experimental right now, nothing published yet.
+
 [![NPM](https://nodei.co/npm/flowgraph.png)](https://nodei.co/npm/flowgraph/)
 
 ```js
