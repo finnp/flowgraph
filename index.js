@@ -1,4 +1,5 @@
 var indexArray = require('index-array')
+var fs = require('fs')
 
 module.exports = Flowgraph
 
@@ -12,30 +13,53 @@ function Flowgraph() {
   }
 }
 
-Flowgraph.prototype.addNode = function (node) {
-  this.nodes.push({id: node, x: 0, y: 0})
+Flowgraph.css = fs.readFileSync(__dirname + '/style.css').toString()
+
+Flowgraph.View = require('./lib/view')
+
+Flowgraph.prototype.addNode = function (node, inports, outports) {
+  if(typeof inports === 'string') inports = [inports]
+  if(typeof outports === 'string') outports = [outports]
+  if(typeof node === 'object') return this.nodes.push(node)
+
+  this.nodes.push({
+    id: node,
+    x: 0,
+    y: 0,
+    inports: inports || ['in'],
+    outports: outports || ['out']
+  })
+}
+
+Flowgraph.prototype.getInports = function(node) {
+  return this.getNode(node).inports || []
+}
+
+Flowgraph.prototype.getOutports = function(node) {
+  return this.getNode(node).outports || []
 }
 
 Flowgraph.prototype.deleteNode = function (id) {
   this.edges = this.edges.filter(function (edge) {
-    return edge.from !== id && edge.to !== id
+    return edge.source.id !== id && edge.target.id !== id
   })
   this.nodes = this.nodes.filter(function (node) {
     return node.id !== id
   })
 }
 
-Flowgraph.prototype.connect = function (a, b) {
-  // {a: ['b'], b: [], c: ['a', 'b', 'c']}
-  // {a: {b: true}, b: {}, c: {a: true, b: true, c: true}} -- no double edge
-  // for(from in edges) {
-  
-  this.edges.push({from: a, to: b})
+Flowgraph.prototype.connect = function (source, target, sourcePort, targetPort) {  
+  this.edges.push({
+    source: {id: source, port: sourcePort || 'in'},
+    target: {id: target, port: targetPort || 'out'}
+  })
 }
 
-Flowgraph.prototype.disconnect = function (a, b) {
+Flowgraph.prototype.disconnect = function (a, b, aPort, bPort) {
   this.edges = this.edges.filter(function (edge) {
-    return edge.from !== a || edge.to !== b
+    if(edge.source.port !== aPort || edge.target.port !== bPort) return true
+
+    return edge.source.id !== a || edge.target.id !== b
   })
 }
 

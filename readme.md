@@ -1,21 +1,33 @@
 # flowgraph
 
-This repo is experimental right now, nothing published yet.
-
 [![NPM](https://nodei.co/npm/flowgraph.png)](https://nodei.co/npm/flowgraph/)
 
+Visualise a flow graph with in and output ports. 
+
+This is pretty alpha right now and the API could still change a lot.
+
+## Example
+
 ```js
-var Flowgraph = require('flowgraph')
+var FlowGraph = require('flowgraph')
 
-var flowgraph = Flowgraph(document.querySelector('body'))
+var FlowGraphView = require('flowgraph').View
 
-flowgraph.add('A')
-flowgraph.add(['A', 'B', 'C'])
-flowgraph.connect('A', 'B')
-flowgraph.remove('A')
+var insertCss = require('insert-css')
 
-flowgraph.nodes()// ['A', 'B', 'C']
-flowgraph.edges() // [['A', 'B']]
+// define your graph
+graph = new FlowGraph()
+graph.addNode('A', ['in'], ['out'])
+graph.addNode('B') // default ports are in and out
+graph.addNode('C', ['1', '2', '3'], ['stdout', 'stderr'])
+graph.connect('B', 'C', 'out', '2')
 
-flowgraph.interactive()
+var view = new FlowGraphView(graph)
+document.body.appendChild(view.svg)
+
+view.on('node-select', function (node) {
+  console.log(node)
+})
+
+insertCss(FlowGraph.css)
 ```
