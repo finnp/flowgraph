@@ -38,7 +38,13 @@ svg .connector, svg .edge {
   fill: transparent;
   stroke: black;
   stroke-width: 3px;
+  transition: stroke-width 0.3s;
 }
+
+svg .edgeactive {
+  stroke-width: 7px;
+}
+
 svg .node .close {
   fill:  #FF5E56;
   x: 5;
