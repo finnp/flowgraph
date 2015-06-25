@@ -26,6 +26,7 @@
   "dependencies": {
     "brfs": "^1.4.0",
     "delegate-dom": "0.0.1",
+    "dom-array": "0.0.2",
     "dom-classlist": "^1.0.1",
     "element-class": "finnp/element-class",
     "index-array": "^2.0.0",

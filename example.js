@@ -13,12 +13,12 @@ document.body.appendChild(view.svg)
 
 
 setTimeout(function () {
-  view.blinkEdge('B', 'C')
+  view.blinkEdge('B')
+  setTimeout(function () {
+    view.blinkEdge('B')
+  }, 500)
 }, 2000)
 
-setTimeout(function () {
-  view.blinkEdge('B', 'C')
-}, 4000)
 
 view.on('node-select', function (node) {
   console.log('Node clicked', node)
