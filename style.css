@@ -14,10 +14,15 @@ svg .node .body {
   stroke: black;
   stroke-width: 3px;
 }
+
+svg text::selection { background: none; }
+
 svg .node text {
   fill: black;
   font-size: 25px;
   font-family: Helvetica;
+  text-anchor: middle;
+  dominant-baseline: middle;
 }
 svg .port {
   cursor: pointer;
