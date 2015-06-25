@@ -33,6 +33,8 @@ Flowgraph.prototype.addNode = function (node, inports, outports) {
   if(typeof node === 'object') options = xtend(options, node)
   
   this.nodes.push(options)
+
+  return options
 }
 
 Flowgraph.prototype.getInports = function(node) {
