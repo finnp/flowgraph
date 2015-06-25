@@ -4,7 +4,7 @@ var insertCss = require('insert-css')
 
 graph = new FlowGraph()
 graph.addNode('A')
-graph.addNode('B')
+graph.addNode({id: 'B', data: 'what'})
 graph.addNode('C', ['1', '2', '3'], ['stdout', 'stderr'])
 graph.connect('B', 'C', 'out', '2')
 

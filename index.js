@@ -1,5 +1,6 @@
 var indexArray = require('index-array')
 var fs = require('fs')
+var xtend = require('xtend')
 
 module.exports = Flowgraph
 
@@ -20,15 +21,18 @@ Flowgraph.View = require('./lib/view')
 Flowgraph.prototype.addNode = function (node, inports, outports) {
   if(typeof inports === 'string') inports = [inports]
   if(typeof outports === 'string') outports = [outports]
-  if(typeof node === 'object') return this.nodes.push(node)
-
-  this.nodes.push({
+  
+  var options = {
     id: node,
     x: 0,
     y: 0,
     inports: inports || ['in'],
     outports: outports || ['out']
-  })
+  }
+  
+  if(typeof node === 'object') options = xtend(options, node)
+  
+  this.nodes.push(options)
 }
 
 Flowgraph.prototype.getInports = function(node) {
