@@ -1,10 +1,13 @@
 var indexArray = require('index-array')
 var fs = require('fs')
 var xtend = require('xtend')
+var EventEmitter = require('events').EventEmitter
+var inherits = require('inherits')
 
 module.exports = Flowgraph
 
 function Flowgraph() {
+  EventEmitter.call(this)
   this.nodes = []
   this.edges = []
   this.connector = {
@@ -13,6 +16,8 @@ function Flowgraph() {
     to: {}
   }
 }
+
+inherits(Flowgraph, EventEmitter)
 
 Flowgraph.css = fs.readFileSync(__dirname + '/style.css').toString()
 
@@ -33,7 +38,7 @@ Flowgraph.prototype.addNode = function (node, inports, outports) {
   if(typeof node === 'object') options = xtend(options, node)
   
   this.nodes.push(options)
-
+  this.emit('node-added', options)
   return options
 }
 
@@ -46,27 +51,44 @@ Flowgraph.prototype.getOutports = function(node) {
 }
 
 Flowgraph.prototype.deleteNode = function (id) {
+  var removedEdges = []
   this.edges = this.edges.filter(function (edge) {
-    return edge.source.id !== id && edge.target.id !== id
+    if(edge.source.id === id || edge.target.id === id) {
+      removedEdges.push(edge)
+      return false
+    }
+    return true
   })
+  removedEdges.forEach(function (edge) {
+    this.emit('edge-deleted', edge)
+  }.bind(this))
+  
+  var deletedNode = null
   this.nodes = this.nodes.filter(function (node) {
-    return node.id !== id
+    if(node.id === id) deletedNode = node
+    else return true
   })
+  if(deletedNode) this.emit('node-deleted', deletedNode)
 }
 
 Flowgraph.prototype.connect = function (source, target, sourcePort, targetPort) {  
-  this.edges.push({
+  var edge = {
     source: {id: source, port: sourcePort || 'in'},
     target: {id: target, port: targetPort || 'out'}
-  })
+  }
+  this.edges.push(edge)
+  this.emit('edge-added', edge)
 }
 
 Flowgraph.prototype.disconnect = function (a, b, aPort, bPort) {
+  var removedEdge = null
+
   this.edges = this.edges.filter(function (edge) {
     if(edge.source.port !== aPort || edge.target.port !== bPort) return true
-
-    return edge.source.id !== a || edge.target.id !== b
+    if(edge.source.id === a && edge.target.id === b) removedEdge = edge
+    else return true
   })
+  if(removedEdge) this.emit('edge-deleted', removedEdge)
 }
 
 Flowgraph.prototype.getEdges = function () {
