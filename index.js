@@ -91,8 +91,16 @@ Flowgraph.prototype.disconnect = function (a, b, aPort, bPort) {
   if(removedEdge) this.emit('edge-deleted', removedEdge)
 }
 
-Flowgraph.prototype.getEdges = function () {
-  return this.edges
+Flowgraph.prototype.getEdge = function (source, target, outport, inport) {
+  inport = inport || 'in'
+  outpot = outport || 'out'
+
+  return this.edges.filter(function (edge) {
+    return edge.source.id === source 
+          && edge.source.port === outport
+          && edge.target.id === target
+          && edge.target.port === inport
+  })[0]
 }
 
 Flowgraph.prototype.getNode = function (id) {

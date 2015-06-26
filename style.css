@@ -46,6 +46,12 @@ svg .connector, svg .edge {
   transition: stroke-width 0.3s;
 }
 
+svg .edge:hover {
+  stroke: red;
+  stroke-width: 5px;
+  cursor: not-allowed;
+}
+
 svg .edgeactive {
   stroke-width: 7px;
 }
