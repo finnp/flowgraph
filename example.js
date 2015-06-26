@@ -30,9 +30,9 @@ document.body.appendChild(view.svg)
 
 
 setTimeout(function () {
-  view.blinkEdge('B')
+  view.blinkEdge('B', 'C', 'out', '2')
   setTimeout(function () {
-    view.blinkEdge('B')
+    view.blinkEdge('B', 'C', 'out', '2')
   }, 500)
 }, 2000)
 
