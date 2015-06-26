@@ -36,8 +36,9 @@ Flowgraph.prototype.addNode = function (node, inports, outports) {
   }
   if(typeof node === 'object') options = xtend(options, node)
   
-  // does a node with this id already exist?
-  if(this.getNode(options.id)) return false
+  if(!/^[a-z_]+$/.test(options.id)) throw(new Error('ID can only be [a-z_]+'))
+  if(this.getNode(options.id))  throw(new Error('Node ID already exists'))
+
   this.nodes.push(options)
   this.emit('node-added', options)
   return options

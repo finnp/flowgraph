@@ -12,10 +12,10 @@ graph.on('edge-added', function (edge) {
   console.log('added edge', edge.source.id, edge.target.id)
 })
 
-graph.addNode('test')
-graph.addNode({id: 'B', data: 'test'})
-graph.addNode('C', ['1', '2', '3'], ['stdout', 'stderr'])
-graph.connect('B', 'C', 'out', '2')
+graph.addNode('test_test')
+graph.addNode({id: 'b', data: 'test'})
+graph.addNode('c', ['1', '2', '3'], ['stdout', 'stderr'])
+graph.connect('b', 'c', 'out', '2')
 
 graph.on('node-deleted', function (node) {
   console.log('deleted', node.id)
@@ -30,9 +30,9 @@ document.body.appendChild(view.svg)
 
 
 setTimeout(function () {
-  view.blinkEdge('B', 'C', 'out', '2')
+  view.blinkEdge('b', 'c', 'out', '2')
   setTimeout(function () {
-    view.blinkEdge('B', 'C', 'out', '2')
+    view.blinkEdge('b', 'c', 'out', '2')
   }, 500)
 }, 2000)
 
