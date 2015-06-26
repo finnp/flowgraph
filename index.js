@@ -34,9 +34,10 @@ Flowgraph.prototype.addNode = function (node, inports, outports) {
     inports: inports || ['in'],
     outports: outports || ['out']
   }
-  
   if(typeof node === 'object') options = xtend(options, node)
   
+  // does a node with this id already exist?
+  if(this.getNode(options.id)) return false
   this.nodes.push(options)
   this.emit('node-added', options)
   return options
