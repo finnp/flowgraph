@@ -12,10 +12,10 @@
     "url": "git+https://github.com/finnp/flowgraph.git"
   },
   "keywords": [
-    "graph",
+    "diagram",
     "flow",
     "flowchart",
-    "diagram"
+    "graph"
   ],
   "author": "Finn Pauls",
   "license": "MIT",
@@ -28,9 +28,9 @@
     "delegate-dom": "0.0.1",
     "dom-array": "0.0.2",
     "dom-classlist": "^1.0.1",
-    "element-class": "finnp/element-class",
     "index-array": "^2.0.0",
     "inherits": "^2.0.1",
+    "randomjs": "^1.0.1",
     "svg-create-element": "^1.0.0",
     "virtual-dom": "^2.0.1",
     "virtual-hyperscript-svg": "^2.0.0",
@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "insert-css": "^0.2.0",
+    "tape": "^4.0.0",
     "wzrd": "^1.3.0"
   }
 }

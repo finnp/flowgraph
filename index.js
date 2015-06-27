@@ -3,6 +3,7 @@ var fs = require('fs')
 var xtend = require('xtend')
 var EventEmitter = require('events').EventEmitter
 var inherits = require('inherits')
+var random = require('randomjs')
 
 module.exports = Flowgraph
 
@@ -28,15 +29,16 @@ Flowgraph.prototype.addNode = function (node, inports, outports) {
   if(typeof outports === 'string') outports = [outports]
   
   var options = {
-    id: node,
+    id: random('[a-z][a-z0-9_]{16}'),
     x: 0,
     y: 0,
     inports: inports || ['in'],
     outports: outports || ['out']
   }
-  if(typeof node === 'object') options = xtend(options, node)
-  
-  if(!/^[a-z_]+$/.test(options.id)) throw(new Error('ID can only be [a-z_]+'))
+  if(typeof node === 'string') options.id = node
+  else options = xtend(options, node)
+
+  if(!/^[a-z][a-z0-9_]*$/.test(options.id)) throw(new Error('ID can only be [a-z][a-z0-9_]+'))
   if(this.getNode(options.id))  throw(new Error('Node ID already exists'))
 
   this.nodes.push(options)
@@ -111,6 +113,10 @@ Flowgraph.prototype.getEdge = function (source, target, outport, inport) {
 
 Flowgraph.prototype.getNode = function (id) {
   return indexArray(this.nodes, 'id')[id]
+}
+
+Flowgraph.prototype.getNodes = function () {
+  return this.nodes
 }
 
 // [{from: 'A', to: 'B'}, ...]

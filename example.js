@@ -12,7 +12,9 @@ graph.on('edge-added', function (edge) {
   console.log('added edge', edge.source.id, edge.target.id)
 })
 
-graph.addNode('test_test')
+graph.addNode({label: 'b'})
+graph.addNode('a')
+graph.addNode({id: 'd', label: 'a'})
 graph.addNode({id: 'b', data: 'test'})
 graph.addNode('c', ['1', '2', '3'], ['stdout', 'stderr'])
 graph.connect('b', 'c', 'out', '2')
