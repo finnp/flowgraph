@@ -63,5 +63,16 @@ svg .node .close {
   width: 10px;
   height: 10px;
   rx: 2;
-  cursor: pointer;
+  cursor: not-allowed;
+  transition: height 0.2s, width 0.2s, x 0.2s, y 0.2s;
+}
+
+svg .node .close:hover {
+  x: 0;
+  y: 0;
+  width: 100px;
+  height: 100px;
+  rx: 8;
+  stroke-width: 3px;
+  stroke: #7B1611;
 }

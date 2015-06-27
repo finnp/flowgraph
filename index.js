@@ -119,6 +119,21 @@ Flowgraph.prototype.getNodes = function () {
   return this.nodes
 }
 
+Flowgraph.prototype.export = function () {
+  return {nodes: this.nodes, edges: this.edges}
+}
+
+Flowgraph.prototype.toJSON = function () {
+  return JSON.stringify(this.export())
+}
+
+Flowgraph.prototype.import = function (graph) {
+  if(typeof graph === 'string') graph = JSON.parse(graph)
+  // TODO: Validate import
+  this.nodes = graph.nodes
+  this.edges = graph.edges
+}
+
 // [{from: 'A', to: 'B'}, ...]
 // var edgeList = []
 // for(from in edges) {

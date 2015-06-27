@@ -19,6 +19,8 @@ graph.addNode({id: 'b', data: 'test'})
 graph.addNode('c', ['1', '2', '3'], ['stdout', 'stderr'])
 graph.connect('b', 'c', 'out', '2')
 
+console.log(graph.export())
+
 graph.on('node-deleted', function (node) {
   console.log('deleted', node.id)
 })
