@@ -2,7 +2,7 @@ var FlowGraph = require('./')
 var FlowGraphView = require('./').View
 var insertCss = require('insert-css')
 
-graph = new FlowGraph()
+window.graph = new FlowGraph()
 
 graph.on('node-added', function (node) {
   console.log('added', node.id)
@@ -29,7 +29,7 @@ graph.on('edge-deleted', function (edge) {
   console.log('deleted edge', edge.source.id, edge.target.id)
 })
 
-var view = new FlowGraphView(graph)
+window.view = new FlowGraphView(graph)
 document.body.appendChild(view.svg)
 
 
