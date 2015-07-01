@@ -1,7 +1,6 @@
-var indexArray = require('index-array')
-var fs = require('fs')
-var xtend = require('xtend')
 var EventEmitter = require('events').EventEmitter
+var indexArray = require('index-array')
+var xtend = require('xtend')
 var inherits = require('inherits')
 var random = require('randomjs')
 
@@ -146,11 +145,3 @@ Flowgraph.prototype.import = function (graph) {
   this.nodes = graph.nodes
   this.edges = graph.edges
 }
-
-// [{from: 'A', to: 'B'}, ...]
-// var edgeList = []
-// for(from in edges) {
-//   for(to in edges[from]) {
-//     if(edges[from][to]) edgeList.push({from: from, to: to})
-//   }
-// }
