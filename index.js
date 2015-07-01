@@ -20,8 +20,6 @@ function Flowgraph () {
 
 inherits(Flowgraph, EventEmitter)
 
-Flowgraph.css = fs.readFileSync(__dirname + '/style.css').toString()
-
 Flowgraph.prototype.addNode = function (node, inports, outports) {
   if (typeof inports === 'string') inports = [inports]
   if (typeof outports === 'string') outports = [outports]
